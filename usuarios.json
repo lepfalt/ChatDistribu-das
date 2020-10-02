@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "nome": "Fulano",
+    "grupo": 1
+  },
+  {
+    "id": 2,
+    "nome": "Beltrano",
+    "grupo": 1
+  },
+  {
+    "id": 3,
+    "nome": "Ciclano",
+    "grupo": 2
+  },
+  {
+    "id": 4,
+    "nome": "João",
+    "grupo": 2
+  },
+  {
+    "id": 5,
+    "nome": "Maria",
+    "grupo": 2
+  }
+]

@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "usuario": 1,
+    "texto": "Mensagem 1"
+  },
+  {
+    "id": 2,
+    "usuario": 1,
+    "texto": "Mensagem 2"
+  },
+  {
+    "id": 3,
+    "usuario": 3,
+    "texto": "Mensagem 3"
+  },
+  {
+    "id": 4,
+    "usuario": 2,
+    "texto": "Mensagem 4"
+  },
+  {
+    "id": 5,
+    "usuario": 4,
+    "texto": "Mensagem 5"
+  },
+  {
+    "id": 6,
+    "usuario": 4,
+    "texto": "Mensagem 6"
+  }
+]
