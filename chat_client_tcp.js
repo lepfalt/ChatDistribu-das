@@ -6,10 +6,15 @@ const listaDeMensagens = require('./mensagens.json');
 
 let usuario = null;
 let usuarioLogado = null;
+
 socket.on('connect', ()=>{
   usuario = process.argv[2];
 
   usuarioLogado = listaDeUsuarios.find(u => u.nome == usuario);
+  socket.emit('agupar_usuario', {
+    grupo: usuarioLogado.grupo
+  });
+
   for(let msg of listaDeMensagens){
     let usuarioDaMensagem = listaDeUsuarios.find(u => u.id == msg.usuario);
     
@@ -18,22 +23,18 @@ socket.on('connect', ()=>{
     }
   }
 
-  socket.emit('agupar_usuario', {
-    grupo: usuarioLogado.grupo
-  });
-
-  console.log(chalk.red(`usuario ${usuario} acabou de entrar`));
-
   socket.emit('user_entry_notification', {
     usuario,
     grupo: usuarioLogado.grupo
   });
+
+  console.log(chalk.red(`usuario ${usuario} acabou de entrar`));
 });
 
 socket.on('message', (event)=>{
   const {mensagem, usuario} = event
 
-  console.log(chalk.green(`${usuario} > ${mensagem}`));
+  console.log(chalk.green(`${usuario.nome} > ${mensagem}`));
 });
 
 socket.on('user_entry_notification', (event)=>{
@@ -43,17 +44,9 @@ socket.on('user_entry_notification', (event)=>{
 repl.start({
   prompt: '',
   eval: (mensagem) => {
-    // console.log(`voce digitou ${mensagem}`)
     socket.send({
       mensagem,
-      usuario,
-      grupo:  usuarioLogado.grupo
+      usuario: usuarioLogado
     });
-
-    // socket.emit('custom_handler', {
-    //   handler: 'custom_handler',
-    //   mensagem: 'log para a mensagem ' + mensagem,
-    //   usuario
-    // });
   }
 });

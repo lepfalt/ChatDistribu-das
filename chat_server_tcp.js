@@ -1,11 +1,12 @@
 const http = require('http').createServer();
 const io = require('socket.io')(http);
+let listaDeMensagens = require('./mensagens.json');
 
 http.listen(3000, () => { console.log('estou ouvindo') });
 
 io.on('connection', (socket)=>{
   console.log('cliente conectado', socket.id);
-
+  
   socket.on('agupar_usuario', (event)=>{
     socket.join(event.grupo);
   });
@@ -16,19 +17,12 @@ io.on('connection', (socket)=>{
     socket.to(event.grupo).emit('user_entry_notification', notification);
   });
   
-  let messages = [];
   socket.on('message', (event)=>{
     console.log(event);
-    messages.push(event);
-    socket.to(event.grupo).emit('message', event);
+    socket.to(event.usuario.grupo).emit('message', event);
   });
 
   socket.on('disconnect', ()=>{
     console.log('cliente desconectado', socket.id)
   });
-
-  // socket.on('custom_handler', (event)=>{
-  //   console.log(event);
-  // });
-
 });
