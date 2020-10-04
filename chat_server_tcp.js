@@ -1,6 +1,5 @@
 const http = require('http').createServer();
 const io = require('socket.io')(http);
-let listaDeMensagens = require('./mensagens.json');
 
 http.listen(3000, () => { console.log('estou ouvindo') });
 
