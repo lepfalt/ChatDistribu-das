@@ -2,7 +2,7 @@ const socket = require('socket.io-client')('http://localhost:3000');
 const repl = require('repl');
 const chalk = require('chalk');
 const listaDeUsuarios = require('./usuarios.json');
-const listaDeMensagens = require('./mensagens.json');
+let listaDeMensagens = require('./mensagens.json');
 
 let usuario = null;
 let usuarioLogado = null;
@@ -44,6 +44,12 @@ socket.on('user_entry_notification', (event)=>{
 repl.start({
   prompt: '',
   eval: (mensagem) => {
+    listaDeMensagens.push({
+      id: listaDeMensagens.length+1,
+      usuario: usuarioLogado.id,
+      texto: mensagem
+    });
+
     socket.send({
       mensagem,
       usuario: usuarioLogado
